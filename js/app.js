@@ -233,6 +233,12 @@
       showError('知りたい日付を選択してください。');
       return;
     }
+    // 年の範囲チェック（過去データは1940年〜。集計年数ぶん遡れるよう1962年以降に制限）
+    const targetYear = Number(targetStr.slice(0, 4));
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(targetStr) || targetYear < 1962 || targetYear > 2100) {
+      showError('日付は1962年〜2100年の範囲で指定してください。');
+      return;
+    }
 
     const place = state.place;
     const years = state.years;

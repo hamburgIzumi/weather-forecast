@@ -58,7 +58,7 @@ const Render = (() => {
     const { sunny, temp, trend } = analysis;
     const rate = sunny.rate ?? 0;
     const rateColor = rate >= 70 ? 'text-amber-300' : rate >= 40 ? 'text-sky-300' : 'text-indigo-300';
-    const verdict = rate >= 70 ? 'お出かけ日和の可能性大！' : rate >= 40 ? '天気はやや不安定な傾向' : '雨具の準備がおすすめ';
+    const verdict = rate >= 70 ? 'お出かけ日和の可能性大！' : rate >= 40 ? '天気はやや不安定な傾向' : '傘など雨・雪への備えがおすすめ';
 
     return `
     <article class="glass-card p-5 sm:p-6 flex flex-col gap-5">
@@ -186,8 +186,8 @@ const Render = (() => {
         ${diffBadge(temp.adjust, '予測への補正')}
       </div>
       <div class="grid grid-cols-2 gap-3">
-        <div class="stat-mini"><i data-lucide="umbrella" class="w-4 h-4 text-sky-300"></i>平均降水量 <strong class="ml-auto">${fmt(precipAvg)} mm</strong></div>
-        <div class="stat-mini"><i data-lucide="wind" class="w-4 h-4 text-teal-300"></i>平均最大風速 <strong class="ml-auto">${fmt(windAvg)} m/s</strong></div>
+        <div class="stat-mini" title="過去同日の降水量の平均"><i data-lucide="umbrella" class="w-4 h-4 text-sky-300 shrink-0"></i>降水量 <strong class="ml-auto whitespace-nowrap">${fmt(precipAvg)} mm</strong></div>
+        <div class="stat-mini" title="過去同日の最大風速の平均"><i data-lucide="wind" class="w-4 h-4 text-teal-300 shrink-0"></i>風速 <strong class="ml-auto whitespace-nowrap">${fmt(windAvg)} m/s</strong></div>
       </div>
       <p class="text-xs text-slate-500 flex items-start gap-1.5"><i data-lucide="info" class="w-3.5 h-3.5 mt-0.5 shrink-0"></i>${reason}</p>
     </article>`;
