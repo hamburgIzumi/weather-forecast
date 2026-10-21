@@ -23,6 +23,7 @@
 | `js/weather-codes.js` | WMO天気コード対応表 |
 | `js/api.js` | 外部API通信 |
 | `js/logic.js` | 予測・集計ロジック |
+| `js/calendar.js` | カスタムカレンダーピッカー（スマホ・PC両対応） |
 | `js/render.js` | 結果画面の描画 |
 | `js/app.js` | 入力UIと実行フロー制御 |
 

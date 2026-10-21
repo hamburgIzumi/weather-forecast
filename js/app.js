@@ -31,7 +31,7 @@
     suggestList: $('location-suggestions'),
     locSelected: $('location-selected'),
     quickTags: $('quick-tags'),
-    dateInput: $('date-input'),
+    dateContainer: $('date-picker-container'),
     segment: $('period-segment'),
     btn: $('predict-btn'),
     empty: $('empty-state'),
@@ -228,7 +228,7 @@
       els.locInput.focus();
       return;
     }
-    const targetStr = els.dateInput.value;
+    const targetStr = CalendarPicker.getDate();
     if (!targetStr) {
       showError('知りたい日付を選択してください。');
       return;
@@ -279,8 +279,15 @@
      初期化
      ========================================================= */
   const init = () => {
-    // 日付のデフォルトは「明日」
-    els.dateInput.value = Utils.toISO(Utils.addDays(Utils.todayJST(), 1));
+    // カレンダーピッカー初期化（デフォルトは「明日」）
+    const initialDate = Utils.toISO(Utils.addDays(Utils.todayJST(), 1));
+    CalendarPicker.init({
+      initialDate,
+      container: els.dateContainer,
+      onSelect: () => {
+        // 日付選択時のアクション（必要に応じて）
+      },
+    });
 
     renderQuickTags();
     bindLocationEvents();
