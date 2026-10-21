@@ -579,19 +579,61 @@ body {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 
-/* カレンダーポップアップ */
+/* 背景バックドロップ（半透明の黒幕） */
+.cal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  animation: fadeIn 0.2s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* カレンダーポップアップ（モバイル時は画面中央モーダル、PC時はドロップダウン） */
 .calendar-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  z-index: 50;
-  padding: 1rem;
-  border-radius: 1.25rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 24px);
+  max-width: 360px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  z-index: 999;
+  padding: 1.1rem;
+  border-radius: 1.4rem;
   background: #0c1322;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  animation: fadeUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* PC（640px以上）では入力バー直下のドロップダウンとして自然に配置 */
+@media (min-width: 640px) {
+  .cal-backdrop {
+    display: none !important; /* PCではバックドロップ不要 */
+  }
+  .calendar-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    animation: fadeUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 }
 
 .cal-nav-btn {

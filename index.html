@@ -55,7 +55,7 @@
 
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-16 grid gap-6 lg:grid-cols-[380px_1fr]">
     <!-- ===== 入力パネル ===== -->
-    <section class="glass-card p-5 sm:p-6 h-fit lg:sticky lg:top-6 fade-in" aria-labelledby="form-title">
+    <section class="glass-card relative z-20 p-5 sm:p-6 h-fit lg:sticky lg:top-6 fade-in" aria-labelledby="form-title">
       <h2 id="form-title" class="text-lg font-bold flex items-center gap-2 mb-5">
         <i data-lucide="sliders-horizontal" class="w-5 h-5 text-sky-300"></i>予測条件
       </h2>
@@ -114,7 +114,7 @@
     </section>
 
     <!-- ===== 結果エリア ===== -->
-    <section id="results" class="min-w-0" aria-live="polite">
+    <section id="results" class="min-w-0 relative z-10" aria-live="polite">
       <!-- 初期表示 -->
       <div id="empty-state" class="glass-card p-8 sm:p-12 text-center fade-in">
         <div class="empty-icon mx-auto mb-6">
