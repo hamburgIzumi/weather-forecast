@@ -74,8 +74,11 @@ const CalendarPicker = (() => {
         <!-- 隠し input（フォーム送信用・外部アクセス用） -->
         <input type="hidden" id="date-input" name="date" value="${selectedDate}" />
 
+        <!-- 背景バックドロップ（半透明の黒幕） -->
+        <div id="cal-backdrop" class="cal-backdrop hidden" aria-hidden="true"></div>
+
         <!-- カレンダーポップアップパネル -->
-        <div id="calendar-dropdown" class="calendar-dropdown hidden" role="dialog" aria-label="日付選択カレンダー">
+        <div id="calendar-dropdown" class="calendar-dropdown hidden" role="dialog" aria-modal="true" aria-label="日付選択カレンダー">
           <!-- ヘッダー（月送り & 年月ジャンプ） -->
           <div class="cal-header flex items-center justify-between pb-3 mb-2 border-b border-slate-700/60">
             <button type="button" id="cal-prev-month" class="cal-nav-btn" aria-label="前月">
@@ -123,6 +126,7 @@ const CalendarPicker = (() => {
       prevBtn: container.querySelector('#date-prev-btn'),
       nextBtn: container.querySelector('#date-next-btn'),
       hiddenInput: container.querySelector('#date-input'),
+      backdrop: container.querySelector('#cal-backdrop'),
       dropdown: container.querySelector('#calendar-dropdown'),
       prevMonth: container.querySelector('#cal-prev-month'),
       nextMonth: container.querySelector('#cal-next-month'),
@@ -164,6 +168,9 @@ const CalendarPicker = (() => {
 
     // 閉じるボタン
     dom.closeBtn.addEventListener('click', () => closeDropdown());
+
+    // バックドロップクリックで閉じる
+    dom.backdrop.addEventListener('click', () => closeDropdown());
 
     // 枠外クリックで閉じる
     document.addEventListener('click', (e) => {
@@ -243,6 +250,7 @@ const CalendarPicker = (() => {
   const openDropdown = () => {
     isOpen = true;
     dom.dropdown.classList.remove('hidden');
+    dom.backdrop.classList.remove('hidden');
     dom.trigger.setAttribute('aria-expanded', 'true');
     dom.chevron.style.transform = 'rotate(180deg)';
     // 選択された日付の年月を表示
@@ -256,6 +264,7 @@ const CalendarPicker = (() => {
   const closeDropdown = () => {
     isOpen = false;
     dom.dropdown.classList.add('hidden');
+    dom.backdrop.classList.add('hidden');
     dom.trigger.setAttribute('aria-expanded', 'false');
     dom.chevron.style.transform = 'rotate(0deg)';
   };
